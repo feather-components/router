@@ -126,7 +126,7 @@ Router.off = function(dom, event, callback){
 };
 
 Router.each = function(arr, callback){
-    if(arr.length){
+    if('length' in arr){
         for(var i = 0; i < arr.length; i++){
             if(callback(arr[i], i) === false){
                 break;
