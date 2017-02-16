@@ -1,6 +1,6 @@
 # router
 ============
-路由控制插件，可用于单页面，目前使用hashbang方式实现
+路由控制插件，可用于单页面，目前使用hash方式实现
 
 ```html
 var router = new Router(function(){
