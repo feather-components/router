@@ -8,10 +8,11 @@ if(typeof define == 'function' && define.amd){
     window.Router = factory();
 }
 })(function(){
-function Router(rules){
+function Router(rules, options){
     var self = this;
 
     self.rules = {};
+    self.options = options || {};
     self.events = {};
     self.isStart = false;
     self.current = null;
@@ -25,15 +26,23 @@ function Router(rules){
     }
 
     self.$listener = function(){
-        var url = location.hash.substr(1);
-        
+        var url = location.hash.substr(1), notCall = false;
+
         self.trigger('go', [url, self.current]);
+
+        if(self.options.beforeCall && self.options.beforeCall.call(this, url, self.current) === false){
+            notCall = true;
+        }
+
         self.current = url;
+
+        if(notCall) return;
 
         if(!self.isStart) return;
 
         if(!url && self.main){
-            self.main();
+            self.trigger('main');
+            self.trigger('call', self.main());
             return;
         }
 
@@ -42,7 +51,7 @@ function Router(rules){
 
             if(res){
                 self.trigger('match', res);
-                callback.apply(callback, res);
+                self.trigger('call', [callback.apply(callback, res), res]);
                 return false;
             }
         });

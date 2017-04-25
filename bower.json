@@ -2,5 +2,5 @@
     "name": "router",
     "desc": "路由控制插件",
     "main": "index.js",
-    "version": "1.0.0"
+    "version": "1.0.1"
 }
