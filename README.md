@@ -29,7 +29,7 @@ var router = new Router({
         alert('news');
     }
 }, {
-    shouldBeCall: function(to, from){
+    shouldCall: function(to, from){
         console.log(to, from);
 
         if(to === 'news'){
