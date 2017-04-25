@@ -26,17 +26,17 @@ function Router(rules, options){
     }
 
     self.$listener = function(){
-        var url = location.hash.substr(1), notCall = false;
+        var url = location.hash.substr(1), dontCall = false;
 
         self.trigger('go', [url, self.current]);
 
-        if(self.options.beforeCall && self.options.beforeCall.call(this, url, self.current) === false){
-            notCall = true;
+        if(self.options.shouldCall && self.options.shouldCall.call(this, url, self.current) === false){
+            dontCall = true;
         }
 
         self.current = url;
 
-        if(notCall) return;
+        if(dontCall) return;
 
         if(!self.isStart) return;
 

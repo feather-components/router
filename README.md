@@ -29,20 +29,22 @@ var router = new Router({
         alert('news');
     }
 }, {
-    beforeCall: function(to, from){
+    shouldBeCall: function(to, from){
         console.log(to, from);
 
         if(to === 'news'){
             //如果url为news，则不执行对应的callback
             return false;
         }
+
+        return true;
     }
 });
 ```
 
 ### Options
 
-* beforeCall: 跳转前执行，return false可阻止该路由对应的callback执行，但是url还是会进行变化
+* shouldCall: 跳转前调用该函数，表示是否调用对应的callback
 
 ### Event
 
